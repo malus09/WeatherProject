@@ -18,7 +18,7 @@ const searchStyles = StyleSheet.create({
     width: "70%",
     alignItems: "center",
     alignSelf: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     backgroundColor: "lightgrey",
     padding: 16,
     borderRadius: 4,
@@ -35,7 +35,7 @@ const searchStyles = StyleSheet.create({
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 20,
+  
     paddingHorizontal: 10,
     borderRadius: 4,
   },

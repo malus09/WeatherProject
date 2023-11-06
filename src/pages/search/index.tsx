@@ -7,8 +7,9 @@ import {
   ImageBackground,
 } from "react-native";
 import axios from "axios";
-import Modal from "react-native-modal"; // Importando a biblioteca do modal
+import Modal from "react-native-modal";
 import searchStyles from "./styles";
+import { IconButton} from "react-native-paper";
 
 // Definindo a interface para os dados do clima
 interface WeatherData {
@@ -23,7 +24,7 @@ interface WeatherData {
 
 // Função para converter Kelvin para Celsius
 const kelvinToCelsius = (kelvin: number) => {
-  return (kelvin - 273.15).toFixed(1); // Convertendo Kelvin para Celsius
+  return (kelvin - 273.15).toFixed(1); 
 };
 
 export default function SearchPage() {
@@ -31,7 +32,7 @@ export default function SearchPage() {
   const [location, setLocation] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false); // Estado para controlar a visibilidade do modal
+  const [isModalVisible, setModalVisible] = useState(false); 
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible); // Alternando a visibilidade do modal
@@ -48,7 +49,7 @@ export default function SearchPage() {
     setLoading(true);
 
     try {
-      const apiKey = ""; //Informe sua key do open weather map
+      const apiKey = "fc5b870f4fed155d9c18773e8b311a50"; 
 
       //Requisitando latitude e longitude para a API por meio do nome do local
       const geocodingApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
@@ -70,6 +71,7 @@ export default function SearchPage() {
       setLoading(false);
     } catch (error) {
       alert("erro");
+      console.log(error);
     }
   };
 
@@ -89,12 +91,13 @@ export default function SearchPage() {
             placeholder="Digite o nome da cidade"
             onChangeText={(text) => setLocation(text)}
           />
-          <TouchableOpacity
-            style={searchStyles.button}
+          <IconButton
+            icon="magnify"
+               style={searchStyles.button}
             onPress={fetchWeatherData}
-          >
-            <Text>Pesquisar</Text>
-          </TouchableOpacity>
+            size={20}          
+          />
+ 
 
           {/* Exibir mensagem de carregamento, se necessário */}
           {loading && <Text>Carregando...</Text>}
@@ -109,7 +112,7 @@ export default function SearchPage() {
               {weatherData && (
                 <Fragment>
                   <Text>
-                    Temperatura atual: {kelvinToCelsius(weatherData.main.temp)}{" "}
+                    Temperatura atual: {kelvinToCelsius(weatherData.main.temp)}
                     °C
                   </Text>
                   <Text>
