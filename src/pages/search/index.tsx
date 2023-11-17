@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import Modal from "react-native-modal";
 import searchStyles from "./styles";
-import { IconButton} from "react-native-paper";
+import { IconButton, Icon } from "react-native-paper";
 
 // Definindo a interface para os dados do clima
 interface WeatherData {
@@ -24,7 +24,7 @@ interface WeatherData {
 
 // Função para converter Kelvin para Celsius
 const kelvinToCelsius = (kelvin: number) => {
-  return (kelvin - 273.15).toFixed(1); 
+  return (kelvin - 273.15).toFixed(1);
 };
 
 export default function SearchPage() {
@@ -32,7 +32,7 @@ export default function SearchPage() {
   const [location, setLocation] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false); 
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible); // Alternando a visibilidade do modal
@@ -49,7 +49,7 @@ export default function SearchPage() {
     setLoading(true);
 
     try {
-      const apiKey = "fc5b870f4fed155d9c18773e8b311a50"; 
+      const apiKey = "fc5b870f4fed155d9c18773e8b311a50";
 
       //Requisitando latitude e longitude para a API por meio do nome do local
       const geocodingApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
@@ -79,7 +79,7 @@ export default function SearchPage() {
     <ImageBackground
       style={searchStyles.img}
       source={{
-        uri: "https://static.vecteezy.com/system/resources/previews/016/088/358/original/cloud-weather-forecast-seamless-pattern-background-wallpaper-illustration-vector.jpg",
+        uri: "https://cdn2.vectorstock.com/i/1000x1000/28/61/weather-forecast-background-vector-932861.jpg",
       }}
     >
       <View style={searchStyles.container}>
@@ -93,11 +93,10 @@ export default function SearchPage() {
           />
           <IconButton
             icon="magnify"
-               style={searchStyles.button}
+            style={searchStyles.button}
             onPress={fetchWeatherData}
-            size={20}          
+            size={20}
           />
- 
 
           {/* Exibir mensagem de carregamento, se necessário */}
           {loading && <Text>Carregando...</Text>}
@@ -108,23 +107,39 @@ export default function SearchPage() {
             style={searchStyles.modalContainer}
           >
             <View style={searchStyles.modalContent}>
-              <Text>Informações do Clima</Text>
+              <Text style={{ alignSelf: "center", fontWeight: "bold" }}>
+                Informações do Clima
+              </Text>
               {weatherData && (
                 <Fragment>
                   <Text>
+                    <Icon source="weather-fog" size={20} />
                     Temperatura atual: {kelvinToCelsius(weatherData.main.temp)}
                     °C
                   </Text>
+
                   <Text>
+                    <Icon source="weather-sunny" size={20} />
                     Temperatura máxima:
                     {kelvinToCelsius(weatherData.main.temp_max)} °C
                   </Text>
+
                   <Text>
+                    <Icon source="weather-sunset-down" size={20} />
                     Temperatura mínima:
                     {kelvinToCelsius(weatherData.main.temp_min)} °C
                   </Text>
-                  <Text>Pressão: {weatherData.main.pressure} hPa</Text>
-                  <Text>Umidade: {weatherData.main.humidity} %</Text>
+
+                  <Text>
+                    <Icon source="weather-windy-variant" size={20} />
+                    Pressão: {weatherData.main.pressure} hPa
+                  </Text>
+
+                  <Text>
+                    <Icon source="weather-snowy-rainy" size={20} />
+                    Umidade: {weatherData.main.humidity} %
+                  </Text>
+
                   <TouchableOpacity
                     style={[
                       searchStyles.button,
