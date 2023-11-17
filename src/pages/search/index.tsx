@@ -49,7 +49,7 @@ export default function SearchPage() {
     setLoading(true);
 
     try {
-      const apiKey = "fc5b870f4fed155d9c18773e8b311a50";
+      const apiKey = "";
 
       //Requisitando latitude e longitude para a API por meio do nome do local
       const geocodingApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
